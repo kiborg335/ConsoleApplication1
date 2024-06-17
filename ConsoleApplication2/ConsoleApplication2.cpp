@@ -4,25 +4,25 @@
 #include <chrono>
 
 int main() {
-    // Создаем окно
+    // Створюємо вікно
     sf::RenderWindow window(sf::VideoMode(576, 564), "Sprite Animation");
 
-    // Загружаем текстуры спрайтов
+    // Завантажуємо текстури спрайтів
     std::vector<sf::Texture> textures(24);
     for (int i = 0; i < 24; ++i) {
         if (!textures[i].loadFromFile("C:\\Users\\Admin\\Desktop\\ConsoleApplication1\\photos\\" + std::to_string(i) + ".png")) {
-            return -1; // Ошибка при загрузке изображения
+            return -1; // Помилка при запускі зображення
         }
     }
 
-    // Создаем спрайт
+    // Створюємо спрайт
     sf::Sprite sprite;
-    sprite.setPosition(0, 0); // Позиция спрайта (центр окна)
+    sprite.setPosition(0, 0); // Позиція спрайта (центр вікна)
 
-    // Индекс текущего спрайта
+    // Індекс поточного спрайта
     int currentFrame = 0;
 
-    // Главный цикл
+    // Головний цикл
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -31,22 +31,22 @@ int main() {
             }
         }
 
-        // Обновляем текстуру спрайта
+        // Обновляєм текстуру спрайта
         sprite.setTexture(textures[currentFrame]);
 
-        // Очищаем окно
+        // Очищуємо вікно
         window.clear();
 
-        // Рисуем спрайт
+        // Малюєм спрайт
         window.draw(sprite);
 
-        // Отображаем содержимое окна
+        // Відображаємо вміст вікна
         window.display();
 
-        // Переходим к следующему кадру
+        // Переходим до наступного кадру
         currentFrame = (currentFrame + 1) % 24;
 
-        // Задержка 50 миллисекунд
+        // Затримка 50 мілісекунд
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 
